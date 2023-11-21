@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://initiative_tracker:hide_initiative_tracker@db:5432/initiative_tracker
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: initiative_tracker
+      POSTGRES_USER: initiative_tracker
+      POSTGRES_PASSWORD: hide_initiative_tracker
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+
+volumes:
+  db_data:

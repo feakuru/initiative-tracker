@@ -6,7 +6,7 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 
 class Session(models.Model):
     """
-    A play session. This is the main model for the app.
+    A play session.
     """
 
     id = fields.UUIDField(pk=True)
@@ -34,9 +34,10 @@ class Event(models.Model):
     actor_id = fields.UUIDField(null=True)
     actor_type = fields.TextField()
     object_id = fields.UUIDField(null=True)
-    object_type = fields.TextField()
+    object_type = fields.TextField()  # TODO: change to enum
 
 
+# TODO implement wrappers to have this done automatically
 SessionReadSchema: TypeAlias = pydantic_model_creator(  # type: ignore[valid-type]
     Session, name="SessionReadSchema",
 )
